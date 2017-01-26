@@ -1,4 +1,4 @@
-const { list: cb_getLatest } = require('ghreleases')
+const { getLatest: cb_getLatest } = require('ghreleases')
 
 const getLatest = (auth, org, repo, options) => {
   return new Promise(function(resolve, reject) {

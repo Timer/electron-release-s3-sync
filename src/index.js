@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const co = require('co')
 const { getLatest } = require('./get-latest')
 const progress = require('request-progress')
@@ -19,6 +21,7 @@ const {
   AWS_BUCKET_URL: _AWS_BUCKET_URL
 } = process.env
 const AWS_BUCKET_URL =
+  _AWS_BUCKET_URL == null ? null :
   _AWS_BUCKET_URL.endsWith('/') ?
   _AWS_BUCKET_URL :
   `${AWS_BUCKET_URL}/`
@@ -37,7 +40,7 @@ if (AWS_BUCKET == null || AWS_BUCKET_URL == null) {
 
 function sync(options = {}) {
   return co(function*() {
-    const { 0: { assets } } = yield getLatest({
+    const { assets } = yield getLatest({
       user: GH_USER,
       token: GH_TOKEN,
     }, GH_ORG, GH_REPO, options)
