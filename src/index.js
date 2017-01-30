@@ -52,7 +52,7 @@ function sync(options = {}) {
       } = asset
       resources.push({ name, url })
     }
-    resources.sort((a, b) => {
+    resources.sort(({ name: a }, { name: b }) => {
       const _a = a.toUpperCase().includes('LATEST'),
         _b = b.toUpperCase().includes('LATEST')
       if (_a == _b) return 0
