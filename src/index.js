@@ -52,6 +52,13 @@ function sync(options = {}) {
       } = asset
       resources.push({ name, url })
     }
+    resources.sort((a, b) => {
+      const _a = a.toUpperCase().includes('LATEST'),
+        _b = b.toUpperCase().includes('LATEST')
+      if (_a == _b) return 0
+      if (_a && !_b) return 1;
+      return -1;
+    })
     console.log('Identified resources:', resources)
     for (const resource of resources) {
       const { name, url } = resource
